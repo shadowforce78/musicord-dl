@@ -160,7 +160,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Changelog
 
-### 1.0.2
+### 1.1.0
 - Added CommonJS support (require/module.exports)
 - Package now supports both ES Modules and CommonJS
 - Updated documentation with examples for both syntaxes
