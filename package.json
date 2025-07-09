@@ -1,9 +1,16 @@
 {
   "name": "@saumondeluxe/musicord-dl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple node package for discord music bot developers to download YouTube videos as MP3",
-  "main": "index.js",
+  "main": "index.cjs",
+  "module": "index.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +40,7 @@
   },
   "files": [
     "index.js",
+    "index.cjs",
     "README.md"
   ]
 }

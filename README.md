@@ -24,7 +24,7 @@ npm install @saumondeluxe/musicord-dl
 
 ## Usage
 
-### Basic Usage
+### ES Modules (import/export)
 
 ```javascript
 import run from '@saumondeluxe/musicord-dl';
@@ -33,11 +33,55 @@ import run from '@saumondeluxe/musicord-dl';
 await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 ```
 
-### Example with Discord Bot
+### CommonJS (require/module.exports)
+
+```javascript
+const run = require('@saumondeluxe/musicord-dl');
+
+// Download a YouTube video as MP3
+(async () => {
+    await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+})();
+```
+
+### Basic Usage
+
+Both syntaxes work exactly the same way!
+
+### Example with Discord Bot (ES Modules)
 
 ```javascript
 import { Client, GatewayIntentBits } from 'discord.js';
 import run from '@saumondeluxe/musicord-dl';
+
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+});
+
+client.on('messageCreate', async (message) => {
+    if (message.content.startsWith('!download ')) {
+        const url = message.content.split(' ')[1];
+        
+        if (url && url.includes('youtube.com')) {
+            message.reply('Downloading...');
+            try {
+                await run(url);
+                message.reply('Download completed! 🎵');
+            } catch (error) {
+                message.reply('Error downloading the video.');
+            }
+        }
+    }
+});
+
+client.login('YOUR_BOT_TOKEN');
+```
+
+### Example with Discord Bot (CommonJS)
+
+```javascript
+const { Client, GatewayIntentBits } = require('discord.js');
+const run = require('@saumondeluxe/musicord-dl');
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
@@ -76,9 +120,14 @@ Downloads a YouTube video as an MP3 file.
 
 **Example:**
 ```javascript
+// ES Modules
 import run from '@saumondeluxe/musicord-dl';
-
 await run('https://www.youtube.com/watch?v=VIDEO_ID');
+
+// CommonJS
+const run = require('@saumondeluxe/musicord-dl');
+await run('https://www.youtube.com/watch?v=VIDEO_ID');
+
 // Creates output.mp3 in the current directory
 ```
 
@@ -110,6 +159,11 @@ SaumonDeLuxe <saumondeluxe@gmail.com>
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Changelog
+
+### 1.0.2
+- Added CommonJS support (require/module.exports)
+- Package now supports both ES Modules and CommonJS
+- Updated documentation with examples for both syntaxes
 
 ### 1.0.1
 - Fixed GitHub repository URLs in `package.json` for `musicord-dl`
