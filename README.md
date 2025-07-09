@@ -111,6 +111,9 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Changelog
 
+### 1.0.1
+- Fixed GitHub repository URLs in `package.json` for `musicord-dl`
+
 ### 1.0.0
 - Initial release
 - YouTube to MP3 download functionality
