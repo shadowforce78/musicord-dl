@@ -1,6 +1,6 @@
 {
   "name": "@saumondeluxe/musicord-dl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple node package for discord music bot developers to download YouTube videos as MP3",
   "main": "index.js",
   "type": "module",
