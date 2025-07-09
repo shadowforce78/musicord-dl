@@ -1,0 +1,11 @@
+# Pour une correction de bug
+npm version patch
+
+# Pour une nouvelle fonctionnalité
+npm version minor
+
+# Pour un changement majeur
+npm version major
+
+# Puis publier
+npm publish --access public
