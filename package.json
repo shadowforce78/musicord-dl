@@ -22,12 +22,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SaumonDeLuxe/musicord.git"
+    "url": "https://github.com/SaumonDeLuxe/musicord-dl.git"
   },
   "bugs": {
-    "url": "https://github.com/SaumonDeLuxe/musicord/issues"
+    "url": "https://github.com/SaumonDeLuxe/musicord-dl/issues"
   },
-  "homepage": "https://github.com/SaumonDeLuxe/musicord#readme",
+  "homepage": "https://github.com/SaumonDeLuxe/musicord-dl#readme",
   "engines": {
     "node": ">=16.0.0"
   },
