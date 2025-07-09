@@ -1,0 +1,118 @@
+# @saumondeluxe/musicord-dl
+
+A simple Node.js package for Discord music bot developers to download YouTube videos as MP3 files.
+
+## Features
+
+- Download YouTube videos as high-quality MP3 files
+- Automatic virtual environment setup
+- Built on top of yt-dlp for reliable downloading
+- ES modules support
+- Easy integration with Discord bots
+
+## Prerequisites
+
+- Node.js 16.0.0 or higher
+- Python 3.7 or higher
+- FFmpeg (automatically installed if not present)
+
+## Installation
+
+```bash
+npm install @saumondeluxe/musicord-dl
+```
+
+## Usage
+
+### Basic Usage
+
+```javascript
+import run from '@saumondeluxe/musicord-dl';
+
+// Download a YouTube video as MP3
+await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+```
+
+### Example with Discord Bot
+
+```javascript
+import { Client, GatewayIntentBits } from 'discord.js';
+import run from '@saumondeluxe/musicord-dl';
+
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+});
+
+client.on('messageCreate', async (message) => {
+    if (message.content.startsWith('!download ')) {
+        const url = message.content.split(' ')[1];
+        
+        if (url && url.includes('youtube.com')) {
+            message.reply('Downloading...');
+            try {
+                await run(url);
+                message.reply('Download completed! 🎵');
+            } catch (error) {
+                message.reply('Error downloading the video.');
+            }
+        }
+    }
+});
+
+client.login('YOUR_BOT_TOKEN');
+```
+
+## API
+
+### `run(url)`
+
+Downloads a YouTube video as an MP3 file.
+
+**Parameters:**
+- `url` (string): The YouTube video URL to download
+
+**Returns:**
+- Promise<void>
+
+**Example:**
+```javascript
+import run from '@saumondeluxe/musicord-dl';
+
+await run('https://www.youtube.com/watch?v=VIDEO_ID');
+// Creates output.mp3 in the current directory
+```
+
+## Output
+
+The downloaded MP3 file will be saved as `output.mp3` in the current working directory.
+
+## Dependencies
+
+This package automatically manages its Python dependencies:
+- `yt-dlp`: For downloading YouTube videos
+- Python virtual environment for isolation
+
+## Requirements
+
+- Python 3.7+
+- FFmpeg (for audio conversion)
+
+## License
+
+ISC
+
+## Author
+
+SaumonDeLuxe <saumondeluxe@gmail.com>
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Changelog
+
+### 1.0.0
+- Initial release
+- YouTube to MP3 download functionality
+- Automatic virtual environment setup
+- ES modules support

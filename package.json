@@ -1,0 +1,38 @@
+{
+  "name": "@saumondeluxe/musicord-dl",
+  "version": "1.0.0",
+  "description": "A simple node package for discord music bot developers to download YouTube videos as MP3",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Discord",
+    "Music",
+    "Bot",
+    "Youtube",
+    "Spotify",
+    "mp3",
+    "download",
+    "yt-dlp",
+    "audio"
+  ],
+  "author": "SaumonDeLuxe <saumondeluxe@gmail.com> (https://saumondeluxe.com)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaumonDeLuxe/musicord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SaumonDeLuxe/musicord/issues"
+  },
+  "homepage": "https://github.com/SaumonDeLuxe/musicord#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ]
+}
