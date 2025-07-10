@@ -30,7 +30,8 @@ npm install @saumondeluxe/musicord-dl
 import run from '@saumondeluxe/musicord-dl';
 
 // Download a YouTube video as MP3
-await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+const filePath = await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+console.log('Downloaded file:', filePath);
 ```
 
 ### CommonJS (require/module.exports)
@@ -40,7 +41,8 @@ const run = require('@saumondeluxe/musicord-dl');
 
 // Download a YouTube video as MP3
 (async () => {
-    await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+    const filePath = await run('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+    console.log('Downloaded file:', filePath);
 })();
 ```
 
@@ -65,8 +67,11 @@ client.on('messageCreate', async (message) => {
         if (url && url.includes('youtube.com')) {
             message.reply('Downloading...');
             try {
-                await run(url);
-                message.reply('Download completed! 🎵');
+                const filePath = await run(url);
+                message.reply({
+                    content: 'Download completed! 🎵',
+                    files: [filePath]
+                });
             } catch (error) {
                 message.reply('Error downloading the video.');
             }
@@ -94,8 +99,11 @@ client.on('messageCreate', async (message) => {
         if (url && url.includes('youtube.com')) {
             message.reply('Downloading...');
             try {
-                await run(url);
-                message.reply('Download completed! 🎵');
+                const filePath = await run(url);
+                message.reply({
+                    content: 'Download completed! 🎵',
+                    files: [filePath]
+                });
             } catch (error) {
                 message.reply('Error downloading the video.');
             }
@@ -110,30 +118,37 @@ client.login('YOUR_BOT_TOKEN');
 
 ### `run(url)`
 
-Downloads a YouTube video as an MP3 file.
+Downloads a YouTube video as an MP3 file and returns the file path.
 
 **Parameters:**
 - `url` (string): The YouTube video URL to download
 
 **Returns:**
-- Promise<void>
+- Promise<string>: The absolute path to the downloaded MP3 file
 
 **Example:**
 ```javascript
 // ES Modules
 import run from '@saumondeluxe/musicord-dl';
-await run('https://www.youtube.com/watch?v=VIDEO_ID');
+const filePath = await run('https://www.youtube.com/watch?v=VIDEO_ID');
+console.log('Downloaded to:', filePath);
 
 // CommonJS
 const run = require('@saumondeluxe/musicord-dl');
-await run('https://www.youtube.com/watch?v=VIDEO_ID');
+const filePath = await run('https://www.youtube.com/watch?v=VIDEO_ID');
+console.log('Downloaded to:', filePath);
 
-// Creates output.mp3 in the current directory
+// File will be saved with the video title as filename
+// Example: "Never_Gonna_Give_You_Up_dQw4w9WgXcQ.mp3"
 ```
 
 ## Output
 
-The downloaded MP3 file will be saved as `output.mp3` in the current working directory.
+The downloaded MP3 file will be saved with a unique filename based on the video title and ID in the current working directory. The function returns the absolute path to the downloaded file.
+
+**Filename format:** `{VideoTitle}_{VideoID}.mp3`
+
+**Example:** `Never_Gonna_Give_You_Up_dQw4w9WgXcQ.mp3`
 
 ## Dependencies
 
@@ -159,6 +174,12 @@ SaumonDeLuxe <saumondeluxe@gmail.com>
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Changelog
+
+### 1.2.0
+- **Breaking Change**: `run()` function now returns the file path instead of void
+- Automatic filename generation based on video title and ID
+- Improved file naming with special character handling
+- Enhanced error handling and fallback naming
 
 ### 1.1.0
 - Added CommonJS support (require/module.exports)
